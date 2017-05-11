@@ -10,8 +10,7 @@
     </header>
     <main>
         <h1>Your Cart</h1>
-        <?php if (empty($_SESSION['cart13']) || 
-                  count($_SESSION['cart13']) == 0) : ?>
+        <?php if (count($cart) == 0) : ?>
             <p>There are no items in your cart.</p>
         <?php else: ?>
             <form action="." method="post">
@@ -23,7 +22,7 @@
                         <th class="right">Quantity</th>
                         <th class="right">Item Total</th>
                     </tr>
-                <?php foreach( $_SESSION['cart13'] as $key => $item ) :
+                <?php foreach($cart as $key => $item) :
                     $cost  = number_format($item['cost'],  2);
                     $total = number_format($item['total'], 2);
                 ?>
@@ -36,8 +35,8 @@
                         </td>
                         <td class="right">
                             <input type="text" class="cart_qty"
-                            name="newqty[<?php echo $key; ?>]"
-                            value="<?php echo $item['qty']; ?>">
+                                name="newqty[<?php echo $key; ?>]"
+                                value="<?php echo $item['qty']; ?>">
                         </td>
                         <td class="right">
                             $<?php echo $total; ?>
@@ -46,7 +45,7 @@
                 <?php endforeach; ?>
                     <tr id="cart_footer">
                         <td colspan="3"><b>Subtotal</b></td>
-                        <td>$<?php echo get_subtotal(); ?></td>
+                        <td>$<?php echo murach\cart\get_subtotal($cart, 2); ?></td>
                     </tr>
                     <tr>
                         <td colspan="4" class="right">
@@ -54,9 +53,9 @@
                         </td>
                     </tr>
                 </table>
-                <p>Click "Update Cart" to update quantities in your
-                cart. <br>Enter a quantity of 0 to remove an item.
-                </p>
+            <p>Click "Update Cart" to update quantities in your
+                cart.<br> Enter a quantity of 0 to remove an item.
+            </p>
             </form>
         <?php endif; ?>
         <p><a href=".?action=show_add_item">Add Item</a></p>

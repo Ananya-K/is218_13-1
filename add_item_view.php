@@ -10,7 +10,7 @@
     </header>
     <main>
         <h1>Add Item</h1>
-        <form action="." method="post">
+        <form action="." method="post" >
             <input type="hidden" name="action" value="add">
 
             <label>Name:</label>
